@@ -1,49 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
+constexpr int INF = 0x7fffffff;
+typedef pair<int, int> P;
+map<int, map<int, int>> weight;
+int dis[100001];
 
-#define NUM 100001
-#define INF 0x7fffffff
-#define LOCAL 1
+int n, m;
 
-int n, m, s;
-unordered_map<int, unordered_map<int, int>> c;
-
-int dist[NUM]; // 0 not used
-bool S[NUM];
-
-struct MyGreater {
-    bool operator()(int& idX, int& idY)
-    {
-        return dist[idX] > dist[idY];
-    }
-};
-priority_queue<int, vector<int>, MyGreater> pq;
+priority_queue<P, vector<P>, greater<>> pq;
 
 void dijkstra(int s)
 {
-    for (int i = 1; i <= n; ++i) {
-        dist[i] = INF;
-        S[i] = false;
-    }
-    for (auto it : c[s]) {
-        int t = it.first;
-        int w = it.second;
-        dist[t] = w;
-    }
-    dist[s] = 0;
-    pq.push(s);
+    fill(dis + 1, dis + 1 + n, INF);
+    dis[s] = 0;
+    pq.push(P(0, s));
     while (!pq.empty()) {
-        int u = pq.top();
+        P element = pq.top();
         pq.pop();
-        if (S[u])
-            continue; // u already in S
-        S[u] = true; // add u to S
-        if (c.find(u) != c.end()) {
-            for (auto it : c[u]) { // all u -> v [w]
-                int v = it.first;
-                int w = it.second;
-                dist[v] = min(dist[v], dist[u] + w); // update dist[v] by u
-                pq.push(v); // push all v
+        int u = element.second;
+        if (dis[u] < element.first)
+            continue;
+        if (weight.find(u) == weight.end()) {
+            continue;
+        }
+        for (auto it = weight.at(u).begin(); it != weight.at(u).end(); ++it) {
+            int v = it->first;
+            int w = it->second;
+            if (dis[u] + w < dis[v]) {
+                dis[v] = dis[u] + w;
+                pq.push(P(dis[v], v));
             }
         }
     }
@@ -51,20 +36,14 @@ void dijkstra(int s)
 
 int main()
 {
-#if LOCAL
-    freopen("../data/dijkstra2.in", "r", stdin);
-#endif
-    scanf("%d%d%d", &n, &m, &s);
-    int u, v, w;
+    int s, u, v, w;
+    cin >> n >> m >> s;
     for (int i = 1; i <= m; ++i) {
-        scanf("%d%d%d", &u, &v, &w);
-        if (c.find(u) == c.end() || c[u].find(v) == c[u].end() || w < c[u][v]) {
-            c[u][v] = w;
-        }
+        cin >> u >> v >> w;
+        weight[u][v] = w;
     }
     dijkstra(s);
-    for (int j = 1; j <= n; ++j) {
-        printf("%d ", dist[j]);
-    }
+    for (int i = 1; i <= n; ++i)
+        printf("%d ", dis[i]);
     return 0;
 }

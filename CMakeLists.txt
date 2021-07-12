@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.16.3)
 
-project(luogu-syt)
+project(training)
 
 # Compile options
+set(CMAKE_C_COMPILER "clang")
 set(CMAKE_CXX_COMPILER "clang++")
 set(CMAKE_BUILD_TYPE DEBUG)
 set(CMAKE_CXX_FLAGS "-fno-asm -std=c++20 -Wall -stdlib=libc++")
@@ -18,6 +19,5 @@ else(${CMAKE_BUILD_TYPE} STREQUAL RELEASE)
     message("Optional:-fno-asm -std=c++20 -Wall -stdlib=libc++ -O2, Type:Release")
 endif(${CMAKE_BUILD_TYPE} STREQUAL DEBUG)
 
-add_executable(test test.cpp)
 add_subdirectory(luogu)
 add_subdirectory(standard)
