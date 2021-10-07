@@ -49,7 +49,7 @@ bool isSamePar(int a, int b)
 
 int main()
 {
-    //freopen("../data/P3366_2.in", "r", stdin);
+    //freopen("../../data/kruskal1.in", "r", stdin);
     // // TODO: Input & Initialization
     //clock_t t = clock();
     int N,
@@ -57,7 +57,7 @@ int main()
     cin >> N >> M;
     init(N);
     for (int i = 1; i <= M; i++) {
-        Edge te {};
+        Edge te;
         cin >> te.n1 >> te.n2 >> te.weight;
         e.push_back(te);
     }

