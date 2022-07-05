@@ -3,9 +3,9 @@
 using namespace std;
 
 constexpr int MAX_N = 100000;
-//constexpr int INF = 2 << 8;
+// constexpr int INF = 2 << 8;
 
-map<int, set<int>> G;
+map<int, set<int>> T;
 bool isFind[MAX_N] = { 0 };
 int depth[MAX_N] = { 0 };
 int parent[MAX_N] = { 0 };
@@ -13,7 +13,7 @@ int parent[MAX_N] = { 0 };
 void dfs(int root, int dep)
 {
     isFind[root] = true;
-    for (auto it : G[root]) {
+    for (auto it : T[root]) {
         if (!isFind[it]) {
             depth[it] = dep + 1;
             parent[it] = root;
@@ -44,8 +44,8 @@ int main()
     cin >> n, n--;
     while (n--) {
         cin >> u >> v;
-        G[u].insert(v);
-        G[v].insert(u);
+        T[u].insert(v);
+        T[v].insert(u);
     }
     dfs(1, 0);
     cin >> m;

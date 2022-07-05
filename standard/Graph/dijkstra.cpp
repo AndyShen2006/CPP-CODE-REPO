@@ -8,12 +8,12 @@ typedef pair<int, int> P;
 map<int, map<int, int>> weight;
 int dis[100001];
 
-priority_queue<P, vector<P>, greater<>> pq;
+priority_queue<P, vector<P>, greater<int>> pq;
 
 int main()
 {
-    //freopen("../../data/P4779_large.in", "r", stdin);
-    //freopen("../../data/P4779_large-d.out", "w", stdout);
+    // freopen("../../data/P4779_large.in", "r", stdin);
+    // freopen("../../data/P4779_large-d.out", "w", stdout);
     int n, m, s, u, v, w;
     cin >> n >> m >> s;
     for (int i = 1; i <= m; i++) {

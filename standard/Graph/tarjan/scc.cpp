@@ -2,14 +2,14 @@
 
 using namespace std;
 
-map<int, set<int>> G;
+map<int, set<int>> T;
 const int maxV = 1000;
 bool isFind[maxV] = { false };
 
 void dfs(int start)
 {
     cout << start;
-    for (auto it : G[start]) {
+    for (auto it : T[start]) {
         if (!isFind[it]) {
             dfs(it);
         }
@@ -19,14 +19,14 @@ void dfs(int start)
 int main()
 {
     freopen("scc.in", "r", stdin);
-    int n, m; //n->vertex,m->edge
+    int n, m; // n->vertex,m->edge
     std::ios::sync_with_stdio(false);
     cin >> n >> m;
     int tempA, tempB;
     for (int i = 0; i < m; i++) {
         cin >> tempA >> tempB;
-        G[tempA].insert(tempB);
-        G[tempB].insert(tempA);
+        T[tempA].insert(tempB);
+        T[tempB].insert(tempA);
     }
     dfs(3);
     return 0;

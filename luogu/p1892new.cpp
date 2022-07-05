@@ -4,7 +4,7 @@ using namespace std;
 
 int par[1010], ans = 0;
 bool isFind[1010];
-map<int, map<int, char>> G;
+map<int, map<int, char>> T;
 
 void init(int n)
 {
@@ -29,14 +29,14 @@ void unite(int a, int b, char type)
     if (a == b) {
         return;
     }
-    //printf("Unite %d %d\n", a, b);
+    // printf("Unite %d %d\n", a, b);
     par[b] = a;
 }
 
 int dfs(int n)
 {
     int type;
-    for (auto it : G[n]) {
+    for (auto it : T[n]) {
         if (it.second == 'E') {
             type = 1;
         } else if (!isFind[it.first]) {
@@ -55,12 +55,12 @@ int main()
     cin >> n >> m;
     init(n);
     for (int i = 1; i <= n; i++) {
-        G[i].insert(make_pair(i, 'F'));
+        T[i].insert(make_pair(i, 'F'));
     }
     for (int i = 1; i <= m; i++) {
         cin >> opt >> p >> q;
-        G[p].insert(make_pair(q, opt));
-        G[q].insert(make_pair(p, opt));
+        T[p].insert(make_pair(q, opt));
+        T[q].insert(make_pair(p, opt));
         unite(p, q, opt);
     }
     for (int i = 1; i <= n; i++) {

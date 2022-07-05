@@ -3,6 +3,16 @@
 using namespace std;
 
 // -mi=(make_input_file) -mo=(make_output_file) -out=(data_name) -from=(number_from) -to=(number to)
+string itos(int i)
+{
+    string s;
+    while (i > 0) {
+        s.push_back('0' + i % 10);
+        i /= 10;
+    }
+    reverse(s.begin(), s.end());
+    return s;
+}
 void execute(const char* a1, const char* a2, const char* a3, const char* a4, const char* a5)
 {
     string strfrom;
@@ -34,10 +44,11 @@ void execute(const char* a1, const char* a2, const char* a3, const char* a4, con
     //cout << dataout << endl;
     string exe;
     for (int i = from; i <= to; i++) {
-        exe = input + " > " + dataout + char('0' + i) + ".in";
+
+        exe = input + " > " + dataout + itos(i) + ".in";
         system(exe.c_str());
         cout << "execute: " << exe << endl;
-        exe = output + " < " + dataout + char('0' + i) + ".in" + " > " + dataout + char('0' + i) + ".out";
+        exe = output + " < " + dataout + itos(i) + ".in" + " > " + dataout + itos(i) + ".out";
         system(exe.c_str());
         cout << "execute: " << exe << endl;
     }
