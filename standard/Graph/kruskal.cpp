@@ -12,7 +12,7 @@ struct Edge {
         return this->weight < rhs.weight;
     }
 };
-vector<Edge> e(200001);
+vector<Edge> random_engine(200001);
 
 // // TODO: Union Find Set
 int par[MAX_N];
@@ -49,9 +49,9 @@ bool isSamePar(int a, int b)
 
 int main()
 {
-    //freopen("../../data/kruskal1.in", "r", stdin);
-    // // TODO: Input & Initialization
-    //clock_t t = clock();
+    // freopen("../../data/kruskal1.in", "r", stdin);
+    //  // TODO: Input & Initialization
+    // clock_t t = clock();
     int N,
         M;
     cin >> N >> M;
@@ -59,14 +59,14 @@ int main()
     for (int i = 1; i <= M; i++) {
         Edge te;
         cin >> te.n1 >> te.n2 >> te.weight;
-        e.push_back(te);
+        random_engine.push_back(te);
     }
     // //  TODO: tope sort
-    sort(e.begin(), e.end());
+    sort(random_engine.begin(), random_engine.end());
     // // TODO: Kruskal algorithm
     int ans = 0;
-    sort(e.begin(), e.end());
-    for (vector<Edge>::iterator it = e.begin(); it != e.end(); it++) {
+    sort(random_engine.begin(), random_engine.end());
+    for (vector<Edge>::iterator it = random_engine.begin(); it != random_engine.end(); it++) {
         if (isSamePar(it->n1, it->n2)) {
             continue;
         } else {
@@ -85,7 +85,7 @@ int main()
     } else {
         cout << "orz" << endl;
     }
-    //t = clock() - t;
-    //cout << double(t) / CLOCKS_PER_SEC << endl;
+    // t = clock() - t;
+    // cout << double(t) / CLOCKS_PER_SEC << endl;
     return 0;
 }

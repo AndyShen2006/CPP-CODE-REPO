@@ -12,8 +12,8 @@ priority_queue<P, vector<P>, greater<P>> pq;
 
 int main()
 {
-    freopen("data/puzzle20.in", "r", stdin);
-    freopen("data/puzzle20.out", "w", stdout);
+    freopen("data/puzzle1.in", "r", stdin);
+    freopen("data/puzzle1.out", "w", stdout);
     //    Input
     int x, m, start, end, val;
     cin >> x >> m;

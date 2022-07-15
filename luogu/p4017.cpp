@@ -2,18 +2,18 @@
 
 using namespace std;
 
-constexpr int N = 1000000;
+constexpr int N = 5010;
 
-int inDeg[N] = { 0 };
-int outDeg[N] = { 0 }; // It is used for checking which one is my answer
+int inDeg[N];
+int outDeg[N]; // It is used for checking which one is my answer
+int len[N];
 vector<int> nG[N];
 queue<int> Q;
-int cnt[N] = { 0 };
+int cnt[N];
 
 int main()
 {
-    // freopen("data/example2.in", "r", stdin);
-    // freopen("data/example2.ans", "w", stdout);
+    // freopen("data/p4017.in", "r", stdin);
     int n, m;
     cin >> n >> m;
     int from, to;
@@ -31,10 +31,12 @@ int main()
     }
     int node;
     while (!Q.empty()) {
-        node = Q.front(), Q.pop();
+        node = Q.front();
+        Q.pop();
         for (auto it : nG[node]) {
             // Add count
-            cnt[it] += cnt[node];
+            cnt[it] = (cnt[it] + cnt[node]) % 80112002;
+            len[it]++;
             // "Delete" this edge
             inDeg[it]--;
             if (inDeg[it] == 0) {
@@ -44,12 +46,10 @@ int main()
     }
     int ans = 0;
     for (int i = 1; i <= n; i++) {
-        // if (outDeg[i] == 0) {
-        //     printf("%d %d\n", i, cnt[i]);
-        // }
-        ans += outDeg[i] == 0 ? cnt[i] : 0;
+        if (outDeg[i] == 0 && len[i] != 0) {
+            ans = (ans + cnt[i]) % 80112002;
+        }
     }
-
-    cout << ans << endl;
+    cout << ans % 80112002 << endl;
     return 0;
 }

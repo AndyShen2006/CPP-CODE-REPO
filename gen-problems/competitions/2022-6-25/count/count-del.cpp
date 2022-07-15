@@ -8,6 +8,7 @@ map<int, int> factor;
 
 int main()
 {
+    freopen("data/count4.in", "r", stdin);
     // the Sieve of Eratosthenes
     for (int i = 2; i <= 1000000; i++) {
         if (isPrime[i]) {
@@ -34,7 +35,7 @@ int main()
     }
     long long ans = 1;
     for (auto it : factor) {
-        // printf("%d %d\n", it.first, it.second);
+        printf("%d %d\n", it.first, it.second);
         ans *= it.second + 1;
     }
     cout << ans << endl;

@@ -27,8 +27,8 @@ vector<Student> datas; // score,name,schools
 
 int main()
 {
-    freopen("data/example.in", "r", stdin);
-    freopen("data/example.out", "w", stdout);
+    freopen("data/admiss10.in", "r", stdin);
+    freopen("data/admiss10.out", "w", stdout);
     int m, n, a, low, tempNum;
     cin >> m >> n >> a >> low;
     string tempStr;
@@ -46,7 +46,7 @@ int main()
         }
         datas.push_back(tempStudent);
     }
-    sort(datas.begin(), datas.end(), greater<Student>());
+    stable_sort(datas.begin(), datas.end(), greater<Student>());
     for (auto& it : datas) {
         if (it.score < low) {
             // The score of this student is too low!

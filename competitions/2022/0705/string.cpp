@@ -4,6 +4,7 @@ using namespace std;
 
 int main()
 {
+    freopen("data/string.in", "r", stdin);
     string s;
     cin >> s;
     for (auto& it : s) {
