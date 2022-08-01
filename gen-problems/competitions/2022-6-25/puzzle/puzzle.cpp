@@ -8,7 +8,7 @@ constexpr int M = 5005;
 int cntEdges[6];
 vector<P> G[M];
 int dis[M];
-priority_queue<P, vector<P>, greater<P>> pq;
+priority_queue<P, vector<P>, greater<P>> q;
 
 int main()
 {
@@ -42,17 +42,17 @@ int main()
     // Shortest Path:Dijkstra Algorithm
     memset(dis, 0x3f, sizeof(dis));
     dis[1] = 0;
-    pq.push(P(0, 1));
-    while (!pq.empty()) {
-        P p = pq.top();
-        pq.pop();
+    q.push(P(0, 1));
+    while (!q.empty()) {
+        P p = q.top();
+        q.pop();
         if (dis[p.second] < p.first) {
             continue;
         }
         for (auto it : G[p.second]) {
             if (dis[p.second] + it.second < dis[it.first]) {
                 dis[it.first] = dis[p.second] + it.second;
-                pq.push(P(dis[it.first], it.first));
+                q.push(P(dis[it.first], it.first));
             }
         }
     }
