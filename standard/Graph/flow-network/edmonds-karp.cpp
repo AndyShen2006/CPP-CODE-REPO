@@ -61,7 +61,7 @@ ll ek(int s, int t)
 
 int main()
 {
-    // freopen("data/mf3.in", "r", stdin);
+    // freopen("data/mf1.in", "r", stdin);
     int s, t;
     cin >> n >> m >> s >> t;
     int u, v;

@@ -4,7 +4,7 @@ using namespace std;
 
 char d[1010][1010] = { { 0 } };
 int now[1010][1010] = { { 0 } };
-int t, r, c;
+int t, n, c;
 
 struct fun {
     int row, column, tnow;
@@ -20,15 +20,15 @@ namespace getdata {
 queue<fun> q;
 inline void push(fun fnow)
 {
-    if (fnow.row <= r && fnow.column <= c) {
+    if (fnow.row <= n && fnow.column <= c) {
         now[fnow.row][fnow.column] = min(now[fnow.row][fnow.column], fnow.tnow + 1);
         q.push(fun::make_fun(fnow.row, fnow.column, fnow.tnow + 1));
     }
 }
 void getnow()
 {
-    //Get fire position
-    for (int i = 1; i <= r; i++) {
+    // Get fire position
+    for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= c; j++) {
             if (d[i][j] == 'F') {
                 q.push(fun::make_fun(i, j, 0));
@@ -49,14 +49,14 @@ void getnow()
 }
 fun returnJoePos()
 {
-    for (int i = 1; i <= r; i++) {
+    for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= c; j++) {
             if (d[i][j] == 'J') {
                 return fun::make_fun(i, j, 0);
             }
         }
     }
-    //Error
+    // Error
     return fun::make_fun(-1, -1, -1);
 }
 }
@@ -64,8 +64,8 @@ namespace solution {
 queue<fun> q;
 inline int PosStatus(fun fnow)
 {
-    //0 ->has already solution, 1->can't walk(already in fire), 2->can walk
-    if (fnow.row == r || fnow.column == c) {
+    // 0 ->has already solution, 1->can't walk(already in fire), 2->can walk
+    if (fnow.row == n || fnow.column == c) {
         return 0;
     } else if (now[fnow.row][fnow.column] < fnow.tnow) {
         return 1;
@@ -100,10 +100,10 @@ void solve()
 int main()
 {
     freopen("data/uva11624a.in", "r", stdin);
-    cin >> t >> r >> c;
+    cin >> t >> n >> c;
     for (int i = 1; i <= t; i++) {
-        //Input
-        for (int j = 1; j <= r; j++) {
+        // Input
+        for (int j = 1; j <= n; j++) {
             for (int k = 1; k <= c; k++) {
                 cin >> d[j][k];
             }

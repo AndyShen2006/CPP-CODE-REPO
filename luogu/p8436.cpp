@@ -2,50 +2,73 @@
 
 using namespace std;
 
-constexpr int MAX_N = 5e5 + 7;
+constexpr int MAX_N = 5e5 + 5;
 vector<int> G[MAX_N];
-int root = 1;
-int dfn[MAX_N], low[MAX_N], cnt;
-map<int, set<int>> cc;
+
+int dfn[MAX_N], low[MAX_N], dfc;
+int root, ans;
+stack<int> st;
+vector<int> bcc[MAX_N];
+int scccnt;
 
 void tarjan(int x, int par)
 {
-    dfn[x] = low[x] = ++cnt;
+    int cntTree = 0;
+    dfn[x] = low[x] = ++dfc;
+    st.emplace(x);
     for (auto it : G[x]) {
         if (it == par) {
             continue;
         }
         if (!dfn[it]) {
+            cntTree++;
             tarjan(it, x);
-            low[x] = min(low[x], low[it]);
+            low[x] = min(low[it], low[x]);
+            if (low[it] >= dfn[x]) {
+                int tmp;
+                scccnt++;
+                while (true) {
+                    tmp = st.top();
+                    st.pop();
+                    bcc[scccnt].emplace_back(tmp);
+                    if (tmp == it) {
+                        break;
+                    }
+                }
+                bcc[scccnt].emplace_back(x);
+            }
         } else {
-            low[x] = min(low[x], dfn[it]);
+            low[x] = min(dfn[it], low[x]);
         }
+    }
+    if (par == -1 && cntTree == 0) {
+        bcc[++scccnt].emplace_back(x);
     }
 }
 
 int main()
 {
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    ios::sync_with_stdio(false);
     int n, m;
     cin >> n >> m;
-    int u, v;
+    int x, y;
     for (int i = 1; i <= m; i++) {
-        cin >> u >> v;
-        G[u].push_back(v);
-        G[v].push_back(u);
+        cin >> x >> y;
+        G[x].emplace_back(y);
+        G[y].emplace_back(x);
     }
     for (int i = 1; i <= n; i++) {
+        root = i;
         if (!dfn[i]) {
-            tarjan(i, -1);
+            tarjan(root, -1);
         }
     }
-    for (int i = 1; i <= n; i++) {
-        cc[low[i]].insert(i);
-    }
-    cout << cc.size() << endl;
-    for (const auto& c : cc) {
-        cout << c.second.size() << ' ';
-        for (auto it : c.second) {
+    cout << scccnt << endl;
+    for (int i = 1; i <= scccnt; i++) {
+        cout << bcc[i].size() << ' ';
+        for (auto it : bcc[i]) {
             cout << it << ' ';
         }
         cout << endl;

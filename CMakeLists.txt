@@ -18,3 +18,5 @@ if(${CMAKE_BUILD_TYPE} STREQUAL DEBUG)
 else(${CMAKE_BUILD_TYPE} STREQUAL RELEASE)
     message("Optional:-fno-asm -std=c++11 -Wall -stdlib=libstdc++ -O2, Type:Release")
 endif(${CMAKE_BUILD_TYPE} STREQUAL DEBUG)
+
+#add_subdirectory(luogu/)
