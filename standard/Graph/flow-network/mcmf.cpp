@@ -38,16 +38,16 @@ int par[MAX_N];
 ll dis[MAX_N];
 ll flow[MAX_N];
 bool inq[MAX_N];
+queue<int> Q;
 bool spfa()
 {
-
-    memset(par, 0, sizeof(par));
-    memset(dis, 0x3f, sizeof(dis));
-    flow[s] = INF;
-    dis[s] = 0;
-    queue<int> Q;
-    Q.emplace(s);
+    Q.push(s);
     inq[s] = true;
+    memset(dis, 0x3f, sizeof(dis));
+    dis[s] = 0;
+    memset(flow, 0x3f, sizeof(flow));
+    memset(par, 0, sizeof(par));
+    par[s] = s;
     while (!Q.empty()) {
         int u = Q.front();
         Q.pop();
@@ -57,13 +57,13 @@ bool spfa()
         }
         for (int i = head[u]; ~i; i = edges[i].next) {
             int v = edges[i].to;
-            if (edges[u].flow > 0 && i != u && par[i] == 0 && dis[u] + edges[i].cost < dis[v]) {
+            if (edges[i].flow > 0 && dis[u] + edges[i].cost < dis[v]) {
                 dis[v] = dis[u] + edges[i].cost;
-                par[v] = u;
                 flow[v] = min(flow[u], edges[i].flow);
+                par[v] = u;
                 if (!inq[v]) {
-                    Q.emplace(v);
                     inq[v] = true;
+                    Q.emplace(v);
                 }
             }
         }
@@ -79,13 +79,12 @@ void mcmf()
     while (spfa()) {
         int x = t;
         maxflow += flow[t];
+        cout << par[t] << endl;
         mincost += dis[t];
-        int i;
         while (x != s) {
-            i = par[x];
-            edges[i].flow -= flow[t];
-            edges[i ^ 1].flow += flow[t];
-            x = edges[i ^ 1].to;
+            edges[x].flow -= flow[t];
+            edges[x ^ 1].flow += flow[t];
+            x = par[x];
         }
     }
 }
@@ -98,10 +97,11 @@ int main()
     int u, v;
     ll f, c;
     for (int i = 1; i <= m; i++) {
-        cin >> u >> v >> f >> c;
+        cin >> u >> v >> c >> f;
         addEdge(u, v, f, c);
-        addEdge(u, v, 0, -c);
+        addEdge(v, u, 0, -c);
     }
+    spfa();
     mcmf();
     cout << maxflow << ' ' << mincost << endl;
     return 0;
