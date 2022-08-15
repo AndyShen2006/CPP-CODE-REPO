@@ -12,7 +12,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Show message
-message("Environment:Archlinux; clang version 12.0.0")
+message("Environment:Archlinux; GNU C Compiler version 12.1.1")
 if(${CMAKE_BUILD_TYPE} STREQUAL DEBUG)
     message("Optional:-fno-asm -std=c++11 -Wall -stdlib=libstdc++ -g -Og, Type:Debug")
 else(${CMAKE_BUILD_TYPE} STREQUAL RELEASE)

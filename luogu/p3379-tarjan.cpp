@@ -60,7 +60,7 @@ int main()
     }
     for (int i = 1; i <= m; i++) {
         cin >> x >> y;
-        tasks.push_back(make_pair(x, y));
+        tasks.emplace_back(x, y);
         query[x].push_back(y);
         query[y].push_back(x);
     }

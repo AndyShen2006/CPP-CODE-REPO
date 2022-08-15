@@ -11,11 +11,11 @@ struct matrix {
     matrix(unsigned long n, unsigned long m) // n行m列
     {
         for (unsigned long i = 0; i <= n; i++) {
-            M.push_back(EmptyVector);
+            M.emplace_back(EmptyVector);
         }
         for (unsigned long i = 1; i <= n; i++) {
             for (unsigned long j = 0; j <= m; j++) {
-                M[i].push_back(EmptyElement);
+                M[i].emplace_back(EmptyElement);
             }
         }
         cntRow = n;
@@ -24,11 +24,11 @@ struct matrix {
     matrix(unsigned long n, unsigned long m, long long val) // n行m列,并将所有元素初始化为val
     {
         for (unsigned long i = 0; i <= n; i++) {
-            M.push_back(EmptyVector);
+            M.emplace_back(EmptyVector);
         }
         for (unsigned long i = 1; i <= n; i++) {
             for (unsigned long j = 0; j <= m; j++) {
-                M[i].push_back(val);
+                M[i].emplace_back(val);
             }
         }
         cntRow = n;
@@ -38,12 +38,12 @@ struct matrix {
     {
         cntRow = I.size();
         cntColumn = I[0].size();
-        M.push_back(EmptyVector);
+        M.emplace_back(EmptyVector);
         for (unsigned long i = 0; i < cntRow; i++) {
-            M.push_back(EmptyVector);
-            M[i + 1].push_back(EmptyElement);
+            M.emplace_back(EmptyVector);
+            M[i + 1].emplace_back(EmptyElement);
             for (unsigned long j = 0; j < cntColumn; j++) {
-                M[i + 1].push_back(I[i][j]);
+                M[i + 1].emplace_back(I[i][j]);
             }
         }
     }
@@ -62,7 +62,7 @@ struct matrix {
             for (unsigned long i = 1; i <= ans.cntRow; i++) {
                 for (unsigned long j = 1; j <= ans.cntColumn; j++) {
                     for (unsigned long k = 1; k <= this->cntColumn; k++) {
-                        ans.M[i][j] = (ans.M[i][j] % MOD + this->M[i][k] * rhs.M[k][j] % MOD) % MOD;
+                        ans.M[i][j] = (ans.M[i][j] % MOD + ((this->M[i][k] % MOD) * (rhs.M[k][j] % MOD)) % MOD) % MOD;
                     }
                 }
             }
@@ -126,25 +126,25 @@ int main()
     long long n = 0, m = 0;
     cin >> n >> m;
     vector<vector<long long>> a;
-    int tmp = 0;
+    long long tmp = 0;
     a.emplace_back(EmptyVector);
-    for (int i = 1; i <= n; i++) {
+    for (long long i = 1; i <= n; i++) {
         cin >> tmp;
         a[0].emplace_back(tmp);
     }
     reverse(a[0].begin(), a[0].end());
     matrix base(a);
     vector<vector<long long>> vmul;
-    for (int i = 0; i < n; i++) {
-        vmul.push_back(EmptyVector);
-        for (int j = 0; j < n; j++) {
-            vmul[i].push_back(EmptyElement);
+    for (long long i = 0; i < n; i++) {
+        vmul.emplace_back(EmptyVector);
+        for (long long j = 0; j < n; j++) {
+            vmul[i].emplace_back(EmptyElement);
         }
     }
-    for (int i = 0; i < n; i++) {
+    for (long long i = 0; i < n; i++) {
         cin >> vmul[i][0];
     }
-    for (int i = 0; i < n; i++) {
+    for (long long i = 0; i < n; i++) {
         vmul[i][i + 1] = 1;
     }
     matrix mul(vmul);

@@ -64,7 +64,7 @@ struct matrix {
             for (unsigned long i = 1; i <= ans.cntRow; i++) {
                 for (unsigned long j = 1; j <= ans.cntColumn; j++) {
                     for (unsigned long k = 1; k <= this->cntColumn; k++) {
-                        ans.M[i][j] = (ans.M[i][j] % MOD + this->M[i][k] * rhs.M[k][j] % MOD) % MOD;
+                        ans.M[i][j] = (ans.M[i][j] % MOD + ((this->M[i][k] % MOD) * (rhs.M[k][j] % MOD)) % MOD) % MOD;
                     }
                 }
             }

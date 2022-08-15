@@ -11,12 +11,12 @@ inline int lowbit(int x)
 }
 
 struct BIT {
-    int max[1 << 10], maxc[1 << 10];
+    int max[1 << 10], sumc[1 << 10];
     void add(int x, int y)
     {
         while (x <= n) {
             max[x] += y;
-            maxc[x] = ::max(maxc[x], y);
+            sumc[x] = ::max(sumc[x], y);
             x += lowbit(x);
         }
     }
@@ -33,7 +33,7 @@ struct BIT {
     {
         int res = 0;
         while (x > 0) {
-            res = ::max(res, maxc[x]);
+            res = ::max(res, sumc[x]);
             x -= lowbit(x);
         }
         return res;

@@ -4,12 +4,12 @@ using namespace std;
 constexpr int NUM = 1000000;
 int head[NUM], cnt;
 struct Edge {
-    int to, nxt, wid;
+    int to, next, wid;
 } edges[NUM];
 void init()
 {
     for (auto& edge : edges) {
-        edge.nxt = -1;
+        edge.next = -1;
     }
     for (int& i : head) {
         i = -1;
@@ -20,7 +20,7 @@ void addEdge(int u, int v, int w)
 {
     edges[cnt].to = v;
     edges[cnt].wid = w;
-    edges[cnt].nxt = head[u];
+    edges[cnt].next = head[u];
     head[u] = cnt++;
 }
 
@@ -36,7 +36,7 @@ int main()
         addEdge(u, v, w);
     }
     for (int i = 1; i <= n; i++) {
-        for (int j = head[i]; ~j; j = edges[j].nxt) {
+        for (int j = head[i]; ~j; j = edges[j].next) {
             cout << i << ' ' << edges[j].to << ' ' << edges[j].wid << endl;
         }
     }
