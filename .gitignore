@@ -1,0 +1,13 @@
+*
+*.idx
+.cache/
+!*/
+test/
+build/
+data/
+!*.cpp
+!*.c
+!.clang-format
+!.clang-tidy
+!CMakeLists.txt
+!LICENSE

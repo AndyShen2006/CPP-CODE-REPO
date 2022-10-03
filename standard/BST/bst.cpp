@@ -64,7 +64,7 @@ void preorder(Node* cur)
 
 int main()
 {
-    freopen("data/bst1.in", "r", stdin);
+    // freopen("data/bst1.in", "r", stdin);
     string str;
     cin >> str;
     root.lData = str.front();
