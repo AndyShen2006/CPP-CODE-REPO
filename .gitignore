@@ -1,15 +1,5 @@
-*
-*.idx
+*.bak
+*.out
 .cache/
-!*/
 test/
 build/
-data/
-!*.*
-!*.cpp
-!*.c
-*.bak
-!.clang-format
-!.clang-tidy
-!CMakeLists.txt
-!LICENSE
