@@ -1,0 +1,18 @@
+if (@status1 == AC) and (@status2 == AC); then
+    @total_score = 150;
+    @final_status = AC;
+    @final_time = @time1;
+    @final_memory = @memory1;
+else
+    if (@status1==AC); then
+        @total_score = 100;
+        @final_status = AC;
+        @final_time = @time1;
+        @final_memory = @memory1;
+    else
+        @total_score = @score1;
+        @final_status = UNAC;
+        @final_time = @time1;
+        @final_memory = @memory1;
+    fi
+fi

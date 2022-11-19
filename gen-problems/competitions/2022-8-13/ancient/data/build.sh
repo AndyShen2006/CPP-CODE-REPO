@@ -1,0 +1,1 @@
+g++ makedata.cpp -o makedata -Wall -lext_random

@@ -1,2 +1,0 @@
-/home/andyshen/Code/training/build/CMakeFiles/edit_cache.dir
-/home/andyshen/Code/training/build/CMakeFiles/rebuild_cache.dir
