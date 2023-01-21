@@ -3,12 +3,12 @@
 using namespace std;
 
 vector<int> T[500010];
-int f[500010][25], depth[500010];
+int f[500010][25], dep[500010];
 
 void dfs(int x, int par, int dep)
 {
     f[x][0] = par;
-    depth[x] = dep;
+    dep[x] = dep;
     for (auto it : T[x]) {
         if (it == par) {
             continue;
@@ -19,16 +19,16 @@ void dfs(int x, int par, int dep)
 
 int lca(int x, int y)
 {
-    if (depth[x] < depth[y]) {
+    if (dep[x] < dep[y]) {
         swap(x, y);
     }
-    while (depth[x] > depth[y]) {
-        x = f[x][static_cast<int>(log2(depth[x] - depth[y]))];
+    while (dep[x] > dep[y]) {
+        x = f[x][static_cast<int>(log2(dep[x] - dep[y]))];
     }
     if (x == y) {
         return x;
     }
-    for (int k = log2(depth[x]) - 1; k >= 0; --k) {
+    for (int k = log2(dep[x]) - 1; k >= 0; --k) {
         if (f[x][k] != f[y][k]) {
             x = f[x][k];
             y = f[y][k];

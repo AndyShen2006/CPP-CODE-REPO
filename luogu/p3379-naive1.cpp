@@ -8,13 +8,13 @@ typedef unsigned long long int ull;
 
 vector<int> T[MAX_V];
 int parent[MAX_V];
-int depth[MAX_V];
+int dep[MAX_V];
 int root;
 
 void dfs(int v, int p, int d)
 {
     parent[v] = p;
-    depth[v] = d;
+    dep[v] = d;
     for (int i = 0; i < T[v].size(); i++) {
         if (T[v][i] != p)
             dfs(T[v][i], v, d + 1);
@@ -28,9 +28,9 @@ void init()
 
 int lca(int u, int v)
 {
-    while (depth[u] > depth[v])
+    while (dep[u] > dep[v])
         u = parent[v];
-    while (depth[v] > depth[u])
+    while (dep[v] > dep[u])
         v = parent[v];
 
     while (u != v) {
