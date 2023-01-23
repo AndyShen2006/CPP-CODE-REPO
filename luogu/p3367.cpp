@@ -1,60 +1,55 @@
-#include <stdio.h>
+#include <bits/stdc++.h>
 
-#define MAX_N 200010
+using namespace std;
 
-int par[MAX_N];
-int depth[MAX_N];
+int par[10010];
 
 void init(int n)
 {
     for (int i = 1; i <= n; i++) {
         par[i] = i;
-        depth[i] = 1;
     }
 }
 
-int find(int n)
+int findpar(int u)
 {
-    if (par[n] == n)
-        return n;
-    else {
-        return find(par[n]);
-    }
-}
-
-void unite(int a, int b)
-{
-    a = find(a);
-    b = find(b);
-    if (a == b)
-        return;
-    if (depth[a] > depth[b]) {
-        par[b] = a;
+    if (par[u] == u) {
+        return u;
     } else {
-        par[a] = b;
-        if (a == b)
-            depth[b]++;
+        return par[u] = findpar(par[u]);
     }
 }
 
-int isSamePar(int a, int b)
+void unite(int x, int y)
 {
-    return find(a) == find(b);
+    x = findpar(x);
+    y = findpar(y);
+    if (x == y) {
+        return;
+    }
+    par[y] = x;
 }
 
 int main()
 {
-    //freopen("p1551.in", "r", stdin);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
     int n, m;
-    scanf("%d%d",&n,&m);
-    init(n + 10);
-    int zi, xi, yi;
-    for (int i = 0; i < m; i++) {
-        scanf("%d%d%d",&zi,&xi,&yi);
-        if(zi==1)  unite(xi, yi);
-        else{
-            if(isSamePar(xi,yi))  printf("Y\n");
-            else printf("N\n");
+    cin >> n >> m;
+    init(n);
+    int op, x, y;
+    for (int i = 1; i <= m; i++) {
+        cin >> op >> x >> y;
+        switch (op) {
+        case 1:
+            unite(x, y);
+            break;
+        case 2:
+            cout << (findpar(x) == findpar(y) ? "Y" : "N") << endl;
+            break;
+        default:
+            break;
         }
     }
     return 0;
