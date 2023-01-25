@@ -1,6 +1,9 @@
 *.bak
 *.in
 *.out
+*.chk
+*.ans
+*.dot
 .cache/
 test/
 build/
