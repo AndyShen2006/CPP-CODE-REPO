@@ -3,6 +3,5 @@ import Data.List
 
 main = do
     n <- read <$> getLine
-    nums :: [String] <- replicateM n $ getLine
-    let allAns = sort (filter (\x -> x == reverse x) nums)
-    putStrLn $ last allAns
+    nums <- replicateM n getLine
+    putStrLn $ maximum (filter (\x -> x == reverse x) nums)
