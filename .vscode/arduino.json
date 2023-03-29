@@ -1,0 +1,6 @@
+{
+    "board": "arduino:avr:uno",
+    "port": "/dev/ttyUSB0",
+    "programmer": "avrispmkii",
+    "sketch": "../Arduino/sketch_mar27a/sketch_mar27a.ino"
+}
