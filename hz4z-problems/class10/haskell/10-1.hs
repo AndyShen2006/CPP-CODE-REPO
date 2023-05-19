@@ -12,5 +12,18 @@
 
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
-cnt :: [Char] -> [(Char, Int)]
-cnt [] = [('a', 0)]
+
+import Data.Map
+import Data.Map qualified as Map
+
+calc :: String -> Map Char Int
+calc [] = Map.empty
+calc (x : xs) = do
+    let cur = calc xs
+    if Map.member x cur
+        then Map.insert x (cur ! x + 1) cur
+        else Map.insert x 1 cur
+
+main = do
+    str <- getLine
+    print $ toList $ calc str
