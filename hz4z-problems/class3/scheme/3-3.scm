@@ -1,0 +1,6 @@
+(define (getGrade score)
+    (cond ((>= score 90) "A")
+        ((<= 80 score 89) "B")
+        ((<= 70 score 79) "C")
+        ((<= 60 score 69) "D")
+        (else "E")))
