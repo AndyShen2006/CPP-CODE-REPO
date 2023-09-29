@@ -1,3 +1,4 @@
+# By AndyShen
 # Note: This is a O(n) program to judge a prime(Obviously correct), but
 # Miller-Rabin Algorithm(May not correct) will be a better choice
 n = int(input())
