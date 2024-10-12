@@ -1,0 +1,30 @@
+如果不考虑重复
+kMin[1]+kMin[2]==>Min[1]
+
+kMin[1]+kMin[3]==>Min[2]
+
+Min[3-4]
+kMin[2]+kMin[3]
+kMin[1]+kMin[4]
+
+Min[5-6]
+kMin[1]+kMin[5]
+kMin[2]+kMin[4]
+
+Min[7-9]
+kMin[1]+kMin[6]
+kMin[2]+kMin[5]
+kMin[3]+kMin[4]
+
+
+
+
+  2 2 3 3 4 6
+ +----------
+2|* 4 5 5 6 8
+2|  * 5 5 6 8
+3|    * 6 7 9
+3|      * 7 9
+4|        * 10
+6|          *
+

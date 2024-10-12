@@ -11,7 +11,7 @@ stack<int> st;
 bool ins[MAX_N];
 
 map<int, set<int>> nG;
-int inDeg[MAX_N], outDeg[MAX_N];
+int deg[MAX_N], outDeg[MAX_N];
 
 void tarjan(int x)
 {
@@ -72,7 +72,7 @@ int main()
     for (int i = 1; i <= n; i++) {
         for (auto it : G[i]) {
             if (sccno[i] != sccno[it] && nG[sccno[i]].find(sccno[it]) == nG[sccno[i]].end()) {
-                inDeg[sccno[it]]++;
+                deg[sccno[it]]++;
                 outDeg[sccno[i]]++;
                 nG[sccno[i]].insert(sccno[it]);
             }
@@ -80,7 +80,7 @@ int main()
     }
     int ans1 = 0, ans2 = 0;
     for (int i = 1; i <= scccnt; i++) {
-        if (!inDeg[i]) {
+        if (!deg[i]) {
             ans1++;
         }
         if (!outDeg[i]) {

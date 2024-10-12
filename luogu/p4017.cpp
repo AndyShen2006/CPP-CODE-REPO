@@ -4,7 +4,7 @@ using namespace std;
 
 constexpr int N = 5010;
 
-int inDeg[N];
+int deg[N];
 int outDeg[N]; // It is used for checking which one is my answer
 int len[N];
 vector<int> nG[N];
@@ -20,11 +20,11 @@ int main()
     for (int i = 1; i <= m; i++) {
         cin >> from >> to;
         nG[from].push_back(to);
-        inDeg[to]++;
+        deg[to]++;
         outDeg[from]++;
     }
     for (int i = 1; i <= n; i++) {
-        if (inDeg[i] == 0) {
+        if (deg[i] == 0) {
             Q.push(i);
             cnt[i] = 1;
         }
@@ -38,8 +38,8 @@ int main()
             cnt[it] = (cnt[it] + cnt[node]) % 80112002;
             len[it]++;
             // "Delete" this edge
-            inDeg[it]--;
-            if (inDeg[it] == 0) {
+            deg[it]--;
+            if (deg[it] == 0) {
                 Q.push(it);
             }
         }

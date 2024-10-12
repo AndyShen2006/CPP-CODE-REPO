@@ -5,7 +5,7 @@ using namespace std;
 constexpr int MAX_N = 1010;
 vector<int> G[MAX_N];
 bool stops[MAX_N];
-int inDeg[MAX_N];
+int deg[MAX_N];
 int level[MAX_N];
 
 int main()
@@ -26,7 +26,7 @@ int main()
                 for (int k = j + 1; k <= n; k++) {
                     if (!stops[k]) {
                         G[j].push_back(k);
-                        inDeg[k]++;
+                        deg[k]++;
                     }
                 }
             }
@@ -34,7 +34,7 @@ int main()
     }
     queue<int> Q;
     for (int i = 1; i <= n; i++) {
-        if (!inDeg[i]) {
+        if (!deg[i]) {
             Q.push(i);
             level[i] = 1;
         }
@@ -44,8 +44,8 @@ int main()
         int u = Q.front();
         Q.pop();
         for (auto it : G[u]) {
-            inDeg[it]--;
-            if (!inDeg[it]) {
+            deg[it]--;
+            if (!deg[it]) {
                 Q.push(it);
                 level[it] = level[u] + 1;
             }
