@@ -12,15 +12,14 @@ void dfs1(int x)
 {
     siz[x] = 1;
     for (auto it : G[x]) {
-        if (it == par[x]) {
-            continue;
-        }
-        dep[it] = dep[x] + 1;
-        par[it] = x;
-        dfs1(it);
-        siz[x] += siz[it];
-        if (!son[x] || siz[son[x]] < siz[it]) {
-            son[x] = it;
+        if (it != par[x]) {
+            par[it] = x;
+            dep[it] = dep[x] + 1;
+            dfs1(it);
+            siz[x] += siz[it];
+            if (!son[x] || siz[son[x]] < siz[it]) {
+                son[x] = it;
+            }
         }
     }
 }
@@ -33,11 +32,22 @@ void dfs2(int x, int tx)
         dfs2(son[x], tx);
     }
     for (auto it : G[x]) {
-        if (it == par[x] || it == son[x]) {
-            continue;
+        if (it != par[x] && it != son[x]) {
+            dfs2(it, it);
         }
-        dfs2(it, it);
     }
+}
+
+int lca(int u, int v)
+{
+    while (top[u] != top[v]) {
+        if (dep[top[u]] >= dep[top[v]]) {
+            u = par[top[u]];
+        } else {
+            v = par[top[v]];
+        }
+    }
+    return (dep[u] < dep[v] ? u : v);
 }
 
 int main()
@@ -63,15 +73,11 @@ int main()
     int a, b;
     for (int i = 1; i <= m; i++) {
         cin >> a >> b;
-        while (top[a] != top[b]) {
-            if (dep[top[a]] >= dep[top[b]]) {
-                a = par[top[a]];
-            } else {
-                b = par[top[b]];
-            }
-        }
-        cout << (dep[a] < dep[b] ? a : b) << endl;
     }
+    for (int i = 1; i <= n; i++) {
+        cout << top[i] << ' ';
+    }
+    cout << endl;
 #if DEBUG
     for (int i = 1; i <= n; i++) {
         printf("%d:size:%d;depth:%d\n", i, size[i], depth[i]);

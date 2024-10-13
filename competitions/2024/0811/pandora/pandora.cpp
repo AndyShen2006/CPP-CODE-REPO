@@ -61,9 +61,15 @@ int main()
     cin.tie(nullptr);
     cout.tie(nullptr);
     ios::sync_with_stdio(false);
+<<<<<<< HEAD
     freopen("pandora.in", "r", stdin);
     // freopen("data/pandora1.in", "r", stdin);
     freopen("pandora.out", "w", stdout);
+=======
+    // freopen("pandora.in", "r", stdin);
+    // freopen("data/pandora1.in", "r", stdin);
+    // freopen("pandora.out", "w", stdout);
+>>>>>>> fbc10f8 (Update on Oct.13th.2024)
     int n, q;
     cin >> n >> q;
     int u, v, w;

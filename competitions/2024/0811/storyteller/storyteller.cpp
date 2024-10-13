@@ -2,7 +2,11 @@
 
 using namespace std;
 
+<<<<<<< HEAD
 constexpr int MAX_N = 50;
+=======
+constexpr int MAX_N = 60;
+>>>>>>> fbc10f8 (Update on Oct.13th.2024)
 struct Tune {
     int x {}, y {};
     char dir {};
