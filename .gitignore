@@ -4,6 +4,11 @@
 *.chk
 *.ans
 *.dot
+*.exe
+*.layout
+*.depend
+*.cbp
+*.o
 .cache/
 test/
 build/
